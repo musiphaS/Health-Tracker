@@ -1,9 +1,8 @@
 // Dashboard.jsx
 import React from 'react';
 import { Box, Text, Image, Badge, Stack, Heading, Icon, HStack, SimpleGrid, Flex } from '@chakra-ui/react';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon, CalendarIcon } from '@chakra-ui/icons';
 import { Droplets, HeartPulse, Plus } from 'lucide-react';
-import { FiCalendar, FiChevronRight } from 'react-icons/fi';
 
 // import Profile from './components/Profile';
 
@@ -213,7 +212,7 @@ const Dashboard = () => {
                     <Flex align="center" justify="space-evenly" bg="gray.100" borderRadius="md">
                         {/* Calendar Icon and Text */}
                         <Flex align="center" gap={2}>
-                            <Icon as={FiCalendar} boxSize={8} p={1} color="blue.500" bg="white" rounded="full" />
+                            <CalendarIcon boxSize={8} p={1} color="blue.500" bg="white"/>
                             <Text fontSize="sm">
                                 Next Checkup: <br />
                                 <span style={{ fontWeight: 'bold' }}>Thurs, 31 Aug 2023</span>

@@ -1,58 +1,72 @@
 // Dashboard.jsx
 import React from 'react';
-import { Box, Text, Image, Badge, Stack, Heading, Icon, HStack, SimpleGrid, Flex } from '@chakra-ui/react';
+import { Box, Text, Image, Badge, Stack, Heading, Icon, HStack, SimpleGrid, Flex, useBreakpointValue } from '@chakra-ui/react';
 import { ChevronRightIcon, CalendarIcon } from '@chakra-ui/icons';
 import { Droplets, HeartPulse, Plus } from 'lucide-react';
+import Profile from './components/Profile';
 
 // import Profile from './components/Profile';
 
 
 const Dashboard = () => {
 
+    const boxWidth = useBreakpointValue({
+        base: "100%",
+        sm: "100%",
+        md: "100%",
+        lg: "span 3"
+      });
+    
+      const iconSize = useBreakpointValue({ base: 6, md: 8 });
+      const padding = useBreakpointValue({ base: 3, sm: 4, md: 5 });
+      const cardPadding = useBreakpointValue({ base: 4, sm: 5, md: 6 });
+      const imageSize = useBreakpointValue({ base: "80px", sm: "90px", md: "100px" });
+
     return (
         <>
             {/* Sidebar */}
-            <Box gridColumn="span 3" p={5} borderRadius="md" position="relative">
-                <Text fontWeight="bold" fontSize="lg">My Last Visit</Text>
-                <Box mt={4} bg="gray.50" borderRadius="20px" padding="6" boxShadow="md" position="relative">
+            <Box gridColumn={boxWidth} p={padding} borderRadius="md" position="relative" width="100%">
+                <Text fontWeight="bold" fontSize={{ base: "md", sm: "lg" }} mb={{ base: 2, md: 4 }}>My Last Visit</Text>
+                <Box mt={4} bg="gray.50" borderRadius="20px" padding={cardPadding} boxShadow="md" position="relative">
                     <Icon as={ChevronRightIcon} w={8} h={8} color="blue.400" bg="white" borderRadius="full" position="absolute" top={4} right={4} />
-                    <Text fontSize="sm">31/08/2023</Text>
-                    <Heading size="sm">Clinic Visit</Heading>
-                    <Text fontWeight="bold" fontSize="lg" color="blue.400">Neurology</Text>
+                    <Text fontSize={{ base: "xs", sm: "sm" }}>31/08/2023</Text>
+                    <Heading size={{ base: "xs", sm: "sm" }}>Clinic Visit</Heading>
+                    <Text fontWeight="bold"   fontSize={{ base: "md", sm: "lg" }} color="blue.400">Neurology</Text>
                 </Box>
 
                 {/* Doctor Info */}
                 <Box mt={6} bg="gray.50" borderRadius="20px" padding="6" boxShadow="md" position="relative">
-                    <Stack direction="row" align="center" spacing={4}>
-                        <Image boxSize="100px" width="30%" height="20%" objectFit="cover" src="African-medical-doctor-man-isolated-on-transparent-background-PNG (1).png" alt="Dr. Weber" />
-                        <Box position="absolute" top="10" right="4">
-                            <Text>Dr. Weber</Text>
-                            <Text>Male, 34</Text>
-                            <Badge colorScheme="blue" padding="2" borderRadius="full">Neurology Specialist</Badge>
+                    <Stack  direction={{ base: "column", sm: "row" }} align={{ base: "flex-start", sm: "center" }} spacing={{ base: 3, md: 4 }} position="relative">
+                        <Image boxSize={imageSize} width={{ base: "40%", sm: "30%" }} height="auto" objectFit="cover" src="African-medical-doctor-man-isolated-on-transparent-background-PNG (1).png" alt="Dr. Weber" />
+                        <Box   position={{ base: "relative", sm: "absolute" }} top={{ sm: "10" }} right={{ sm: "4" }} mt={{ base: 2, sm: 0 }}>
+                            <Text fontSize={{ base: "sm", md: "md" }}>Dr. Weber</Text>
+                            <Text fontSize={{ base: "sm", md: "md" }}>Male, 34</Text>
+                            <Badge colorScheme="blue"  padding={{ base: 1, md: 2 }} borderRadius="full" fontSize={{ base: "xs", md: "sm" }} >Neurology Specialist</Badge>
                         </Box>
                     </Stack>
                 </Box>
 
                 {/* Diagnosis */}
-                <Box mt={6} bg="gray.50" borderRadius="20px" padding="6" boxShadow="md" position="relative">
-                    <Icon as={ChevronRightIcon} w={8} h={8} color="blue.400" bg="white" borderRadius="full" position="absolute" top={4} right={4} />
-                    <Text fontWeight="bold">Last Diagnosis</Text>
-                    <Text fontSize="sm">Cluster Headache</Text>
+                <Box mt={6} bg="gray.50" borderRadius="20px" padding={cardPadding} boxShadow="md" position="relative">
+                    <Icon as={ChevronRightIcon} w={iconSize} h={iconSize} color="blue.400" bg="white" borderRadius="full" position="absolute" top={4} right={4} />
+                    <Text fontWeight="bold" mb={2}>Last Diagnosis</Text>
+                    <Text fontSize={{ base: "sm", md: "md" }} mb={4}>Cluster Headache</Text>
                     {/* Vital Signs */}
-                    <HStack>
-                        <Droplets color='red' />
-                        <Text>Blood Status</Text>
+                    <HStack mb={2}>
+                    <Droplets color="red" size={useBreakpointValue({ base: 16, md: 20 })} />
+                        <Text fontSize={{ base: "sm", md: "md" }}>Blood Status</Text>
                     </HStack>
                     <Text bg="white" py={1}>
                         <Text textAlign="right"><Text bg="blue.200" color="white" as="span" fontSize="xs" py="2" px="2px" borderRadius="10px">110/70</Text></Text>
                     </Text>
 
                     <HStack>
-                        <HeartPulse color="red" />
-                        <Text>Heart Rate</Text>
+                    <HeartPulse color="red" size={useBreakpointValue({ base: 16, md: 20 })} />
+                        <Text fontSize={{ base: "sm", md: "md" }}>Heart Rate</Text>
                     </HStack>
                     <Text bg="white" py={1}>
-                        <Text textAlign="right"> <svg viewBox="0 0 200 50" className="w-full">
+                        <Text textAlign="right"> 
+                            <svg viewBox="0 0 200 50" className="w-full">
                             <path
                                 d="M0,25 Q25,0 50,25 T100,25 T150,30 T200,20"
                                 fill="none"
@@ -67,8 +81,8 @@ const Dashboard = () => {
             </Box>
 
             {/* Overview Section */}
-            <Box gridColumn="span 6" bg="white" p={5} borderRadius="md" display="flex" flexDirection="column" justifyContent="space-between">
-                <Heading size="xl">My Health Overview</Heading>
+            <Box gridColumn={{ base: "span 12", md: "span 6" }} bg="white" p={padding} borderRadius="md" display="flex" flexDirection="column" justifyContent="space-between">
+                <Heading size={{ base: "lg", md: "xl" }} mb={4} >My Health Overview</Heading>
                 <Box position="relative" boxSize="70%" display="flex" justifyContent="center" alignItems="center">
                     <Image
                         objectFit="contain"
@@ -76,6 +90,7 @@ const Dashboard = () => {
                         alt="Dr. Weber"
                         width="100%"
                         height="100%"
+                        maxW="400px"
                     />
                     <Box
                         position="absolute"
@@ -90,6 +105,7 @@ const Dashboard = () => {
                             top="20"
                             left="20"
                             color="black"
+                            fontSize={{ base: "xs", md: "sm" }}
                             sx={{
                                 bgGradient: 'linear(to-r, blue.400, white)',
                                 color: 'black',
@@ -106,6 +122,7 @@ const Dashboard = () => {
                             top="14"
                             right="25"
                             color="black"
+                            fontSize={{ base: "xs", md: "sm" }}
                             sx={{
                                 bgGradient: 'linear(to-r, blue.400, white)',
                                 color: 'black',
@@ -122,6 +139,7 @@ const Dashboard = () => {
                             bottom="20"
                             left="0"
                             color="black"
+                            fontSize={{ base: "xs", md: "sm" }}
                             sx={{
                                 bgGradient: 'linear(to-r, blue.400, white)',
                                 color: 'black',
@@ -138,6 +156,7 @@ const Dashboard = () => {
                             bottom="40"
                             right="-5"
                             color="black"
+                            fontSize={{ base: "xs", md: "sm" }}
                             sx={{
                                 bgGradient: 'linear(to-r, blue.400, white)',
                                 color: 'black',
@@ -151,16 +170,16 @@ const Dashboard = () => {
                 </Box>
 
                 <Box mt="6">
-                    <Heading size="md">Complaints</Heading>
-                    <SimpleGrid columns={2} spacing={4} mt={6}>
-                        <Box bg="gray.100" p={4} borderRadius="md" boxShadow="sm">
+                    <Heading size="md" mb={4}>Complaints</Heading>
+                    <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
+                        <Box bg="gray.100" p={cardPadding} borderRadius="md" boxShadow="sm" textAlign="center">
                             <Heading size="sm" mb={2}>Headache</Heading>
-                            <Text>Add your content here</Text>
+                            <Text>Headache is a problem</Text>
                         </Box>
 
-                        <Box bg="gray.100" p={4} borderRadius="md" boxShadow="sm">
+                        <Box bg="gray.100" p={cardPadding} borderRadius="md" boxShadow="sm" textAlign="center">
                             <Heading size="sm" mb={2}>Blury Eye</Heading>
-                            <Text>Add your content here</Text>
+                            <Text fontSize="sm">Eyes hurt a lot</Text>
                         </Box>
                     </SimpleGrid>
                 </Box>
@@ -172,6 +191,7 @@ const Dashboard = () => {
                 {/* <Box>
                     <Profile />
                 </Box> */}
+                      <Profile/>
                 <Box mt={4} borderRadius="lg" py="10" position="relative">
                     <Flex justifyContent="space-between" alignItems="center" mb={4}>
                         <Text fontWeight="bold" fontSize="lg">Treatment</Text>
